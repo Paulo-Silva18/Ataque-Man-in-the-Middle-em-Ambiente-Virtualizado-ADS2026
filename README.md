@@ -1,4 +1,4 @@
-# Prova 03 — Implementação de um Ataque Man-in-the-Middle em Ambiente Virtualizado
+<img width="1280" height="800" alt="arpdetalhado" src="https://github.com/user-attachments/assets/00db1dec-b9c8-45b7-8b8d-2782cab3ff97" /># Prova 03 — Implementação de um Ataque Man-in-the-Middle em Ambiente Virtualizado
 
 > **Disciplina:** Segurança da Informação — 2º Semestre 2026  
 > **Instituição:** IFTM Campus Patrocínio  
@@ -180,10 +180,11 @@ Address: 192.168.56.102       ← IP do Kali, não o real!
 
 **Via navegador** — ao acessar `http://exemplo-alvo.com`, o Edge carregou a página falsa hospedada no Kali em vez do site legítimo.
 
-📸 *[Inserir print: nslookup retornando 192.168.56.102]*  
-📸 *[Inserir print: navegador Edge exibindo "Site falsificado - PoC DNS Spoofing"]*
+📸 <img width="1024" height="768" alt="nslookup" src="https://github.com/user-attachments/assets/41d35ed1-3660-46d7-8108-7571073cd395" />  
+📸 <img width="1024" height="768" alt="site falso" src="https://github.com/user-attachments/assets/32c18a8a-db90-4702-90bb-41f8f398c8d3" />
 
 ---
+
 
 ## 4. Capturas do Wireshark
 
@@ -209,8 +210,8 @@ O Kali anuncia para ambas as vítimas que o MAC dos demais hosts é o seu própr
 
 Consultas DNS originadas pelo Windows (`.103`) e destinadas à Metasploitable (`.100`), passando pelo Kali por conta do ARP spoof ativo — comprovando a posição de MITM.
 
-📸 *[Inserir print: Wireshark mostrando pacotes ARP forjados]*  
-📸 *[Inserir print: Wireshark mostrando queries DNS interceptadas]*
+📸 <img width="1280" height="800" alt="arpdetalhado" src="https://github.com/user-attachments/assets/8ad28235-7e1a-4634-bc26-9139e16378f0" />
+📸 <img width="1280" height="800" alt="dns2" src="https://github.com/user-attachments/assets/abc5bbb9-5669-4aed-9277-260d0d5c8c30" />
 
 Os arquivos `.pcapng` estão disponíveis neste repositório:
 - `arp.pcapng` — captura focada nos pacotes ARP
