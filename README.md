@@ -1,4 +1,4 @@
-<img width="1280" height="800" alt="arpdetalhado" src="https://github.com/user-attachments/assets/00db1dec-b9c8-45b7-8b8d-2782cab3ff97" /># Prova 03 — Implementação de um Ataque Man-in-the-Middle em Ambiente Virtualizado
+># Prova 03 — Implementação de um Ataque Man-in-the-Middle em Ambiente Virtualizado
 
 > **Disciplina:** Segurança da Informação — 2º Semestre 2026  
 > **Instituição:** IFTM Campus Patrocínio  
