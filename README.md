@@ -443,9 +443,9 @@ O ataque MITM demonstrado foi possível porque os protocolos ARP e DNS foram pro
 
 ---
 
-## 6. Link de Submissão
+## 6. Link do Vídeo
 
-> 🔗 [Inserir aqui o link de submissão do Moodle]
+> 🔗 https://youtu.be/b8yrvWUdQtk
 
 ---
 
